@@ -1,0 +1,22 @@
+{% extends "applicant/layout.html" %}
+{% load static %}
+{% block content %}
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val()
+    var token        = '28061981';
+    var currDate     = "{{ currDate }}";
+    {#var templatePath = basePath+'/signup/';#}
+    {#var servicesPath = basePath+'/signup/applicants';#}
+</script>
+
+<script src="{% static 'applicant/Module.js' %}"></script>
+<script src="{% static 'applicant/Service.js' %}"></script>
+<script src="{% static 'applicant/Controller.js' %}"></script>
+<script src="{% static 'applicant/Router.js' %}"></script>
+<script src="{% static 'applicant/Directive.js' %}"></script>
+
+<div ng-app="Applicant" ng-cloak>
+    <div ng-view></div>
+</div>
+
+{% endblock %}

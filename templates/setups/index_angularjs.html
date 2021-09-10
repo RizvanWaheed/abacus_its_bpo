@@ -1,0 +1,46 @@
+{% extends "aeams/layout.html" %}
+{% load static %}
+{% block content %}
+<base href="/setups/">
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val()
+    var role = "{{ role }}";
+    var officers  = {{officers|safe}};
+    var heads  = {{heads|safe}};
+    var states  = {{states|safe}};
+    var domains  = {{domains|safe}};
+
+    var token        = '28061981';
+    var currDate     = "{{ currDate }}";
+    var userRole     = 1;
+    var userRoleID   = 1;
+    var userCompanyID= 1;
+	var userCompany  = 'Abacus ITS BPO';
+
+    var setupsTemplatePath = '/static/setups/template/';
+    var setupsServicesPath = '/setups';
+
+</script>
+<script src="{% static 'setups/Filter.js' %}"></script>
+<script src="{% static 'setups/Directive.js' %}"></script>
+<script src="{% static 'setups/Module.js' %}"></script>
+<script src="{% static 'setups/Service.js' %}"></script>
+
+
+
+<script src="{% static 'setups/controller/DashboardController.js' %}"></script>
+<script src="{% static 'setups/controller/BasicOptionsController.js' %}"></script>
+<script src="{% static 'setups/controller/SetupOptionsController.js' %}"></script>
+
+<script src="{% static 'setups/Router.js' %}"></script>
+<div ng-app="Setups" ng-cloak >
+    {% include "aeams/header.html" %}
+    <div class="container m-bottom-30">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div ng-view class="view-animate"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

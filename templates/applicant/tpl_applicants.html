@@ -1,0 +1,313 @@
+<div class="col-sm-12" >
+    <div class="clearfix"><div class="col-md-12 p-left-0"><h3>Please Fill the Information Below <small>(Enter CNIC First)</small></h3></div></div>
+    <form class="clearfix add-user border-wrap" name="applicantForm"  novalidate><!-- ng-submit="saveEmployeeInformation()" -->
+        <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)" dismiss-on-timeout={{alert.time}} >{{alert.message}}</div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.cnic.$invalid && applicantForm.cnic.$touched && !applicantForm.cnic.$pristine }">
+            <label for="cnic" ng-hide="applicantForm.cnic.$error.minlength || applicantForm.cnic.$error.maxlength">CNIC: <i class="red">*</i>(without '-')</label>
+            <label for="cnic" ng-show="applicantForm.cnic.$error.minlength" class="red">CNIC: is too short.</label>
+            <label for="cnic" ng-show="applicantForm.cnic.$error.maxlength" class="red">CNIC: is too long.</label>
+            <!--  <label for="cnic" ng-show="applicantForm.cnic.$dirty && applicantForm.cnic.$error.required" class="red">CNIC: Enter.</label> -->
+            <div class="input-group">
+                <input id="cnic" type="text" class="form-control" name="cnic" ng-blur="searchApplicantCnic()" placeholder="Enter cnic number" ng-model="applicant.cnic" ng-minlength="13" ng-maxlength="13" ng-disabled="existing_employee" angular-mask="00000-0000000-0" autofocus required>
+                <span class="input-group-addon" ng-hide="applicantForm.cnic.$invalid" ng-click="searchApplicantCnic()" > <i class="fa fa-search"></i> </span>
+                <span class="input-group-addon" ng-show="applicantForm.cnic.$invalid" > <i class="fa fa-search"></i> </span>
+            </div>
+            <!-- <p ng-show="applicantForm.cnic.$error.required"  class="help-block">CNIC is required.</p> -->
+        </div>
+       <div class="form-group col-md-3">
+            <label for="cnic_insurance_date">CNIC Insurance Date <i class="red">*</i><small>(year-month-day)</small></label><!-- <div class="col-md-6"> -->
+            <div class="input-group" >
+                <input id="cnic_insurance_date" name="cnic_insurance_date" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="applicant.cnic_insurance_date" is-open="popup.opened1" datepicker-options="dateOptions" ng-required="true" ng-disabled="existing_employee" close-text="Close" data-inputmask="'mask':'9999-99-99'"  required>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()" ng-disabled="existing_employee"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+             <!--  </div> -->
+            <!-- <input id="d-o-b" type="text" class="form-control" name="d-o-b" placeholder="mm / dd / yyyy" ng-model="applicant.dob"> -->
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.first_name.$invalid && !applicantForm.first_name.$pristine }">
+            <label ng-hide="applicantForm.first_name.$invalid && applicantForm.first_name.$error.minlength" for="nameq">First Name: <i class="red">*</i></label>
+            <label ng-show="applicantForm.first_name.$invalid && !applicantForm.first_name.$pristine && applicantForm.first_name.$error.minlength" class="red">First Name is required.</label>
+            <input id="first_name" type="text" class="form-control" name="first_name" placeholder="Enter First name" ng-minlength="3" ng-model="applicant.first_name" ng-disabled="existing_employee" required>
+           <!--  <p ng-show="applicantForm.first_name.$invalid && !applicantForm.first_name.$pristine && applicantForm.first_name.$error.minlength" class="help-block">You name is required.</p>  -->
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.last_name.$invalid && !applicantForm.last_name.$pristine }">
+            <label ng-hide="applicantForm.last_name.$invalid && applicantForm.last_name.$error.minlength" for="name">Last Name: <i class="red">*</i></label>
+            <label ng-show="applicantForm.last_name.$invalid && !applicantForm.last_name.$pristine && applicantForm.last_name.$error.minlength" class="red">Last Name is required.</label>
+            <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Enter Last name" ng-minlength="3" ng-model="applicant.last_name" ng-disabled="existing_employee" required>
+           <!--  <p ng-show="applicantForm.last_name.$invalid && !applicantForm.last_name.$pristine && applicantForm.last_name.$error.minlength" class="help-block">You name is required.</p>  -->
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.father_name.$invalid && !applicantForm.father_name.$pristine }">
+            <label ng-hide="applicantForm.father_name.$invalid && applicantForm.father_name.$error.minlength" for="name">Father Name: <i class="red">*</i></label>
+            <label ng-show="applicantForm.father_name.$invalid && !applicantForm.father_name.$pristine && applicantForm.father_name.$error.minlength" class="red">Father Name is required.</label>
+            <input id="father_name" type="text" class="form-control" name="father_name" placeholder="Enter Father name" ng-minlength="3" ng-model="applicant.father_name" ng-disabled="existing_employee" required>
+           <!--  <p ng-show="applicantForm.father_name.$invalid && !applicantForm.father_name.$pristine && applicantForm.father_name.$error.minlength" class="help-block">You name is required.</p>  -->
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.contact.$invalid && !applicantForm.contact.$pristine }">
+            <label ng-hide="applicantForm.contact.$error.minlength || applicantForm.contact.$error.maxlength" for="contact">Contact: <i class="red">*</i> </label>
+            <label ng-show="applicantForm.contact.$error.minlength" class="red">Contact number is too short.</label>
+            <label ng-show="applicantForm.contact.$error.maxlength" class="red">Contact number is too long.</label>
+            <input id="contact" type="text" class="form-control" name="contact" placeholder="Enter contact number" ng-minlength="11" ng-maxlength="11" ng-model="applicant.contact" ng-disabled="existing_employee" required>
+        </div>
+        <div class="form-group col-md-3" >
+            <!-- ng-class="{ 'has-error' : applicantForm.eaddress.$invalid && !applicantForm.eaddress.$pristine }"<label ng-hide="applicantForm.eaddress.$invalid && !applicantForm.eaddress.$pristine" for="eaddress">Email: <i class="red">*</i></label>
+            <label ng-show="applicantForm.eaddress.$invalid && !applicantForm.eaddress.$pristine" class="red"> Invalid eaddress</label>required -->
+            <label for="eaddress">Email:</label>
+            <input id="eaddress" type="eaddress" class="form-control" name="eaddress" placeholder="Enter eaddress" ng-model="applicant.eaddress" ng-disabled="existing_employee" >
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.gender.$invalid && !applicantForm.gender.$pristine }">
+            <label ng-hide="applicantForm.gender.$invalid && !applicantForm.gender.$pristine" for="gender">
+                Gender: <i class="red">*</i>
+            </label>
+            <label ng-show="applicantForm.gender.$invalid && !applicantForm.gender.$pristine" class="red">Select gender.</label>
+            <select name="gender" class="form-control" ng-model="applicant.gender" ng-disabled="existing_employee" required>
+                <option value="">Please select ....</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="dob">Date Of Birth: <i class="red">*</i><small>(year-month-day)</small></label><!-- <div class="col-md-6"> -->
+            <div class="input-group" >
+                <input id="dob" name="dob" type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="applicant.dob" is-open="popup.opened" datepicker-options="dateOptions" ng-required="true" ng-disabled="existing_employee" close-text="Close" data-inputmask="'mask':'9999-99-99'" required>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open()" ng-disabled="existing_employee"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+            </div>
+             <!--  </div> -->
+            <!-- <input id="d-o-b" type="text" class="form-control" name="d-o-b" placeholder="mm / dd / yyyy" ng-model="applicant.dob"> -->
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.city_id.$invalid && applicantForm.city_id.$touched }">
+            <label ng-hide="applicantForm.city_id.$invalid && !applicantForm.city_id.$pristine" for="city">City: <i class="red">*</i></label>
+            <label ng-show="applicantForm.city_id.$invalid && !applicantForm.city_id.$pristine" class="red">Select a city</label>
+            <select id="city_id" name="city_id" class="form-control" ng-model="applicant.city_id" convert-to-number ng-disabled="existing_employee"  required>
+                <option value="">Please select ....</option>
+                <option ng-repeat="option in listOfCities" value={{option.id}}>{{option.name}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.address.$invalid && applicantForm.address.$touched }">
+            <label ng-hide="applicantForm.address.$invalid && !applicantForm.address.$pristine" for="address">Address: <i class="red">*</i></label>
+            <label ng-show="applicantForm.address.$invalid && !applicantForm.address.$pristine" class="red">Enter address</label>
+            <input id="address" type="text" class="form-control" name="address" placeholder="Enter Address" ng-model="applicant.address" ng-disabled="existing_employee" required>
+        </div>
+        <div class="form-group col-md-3" ng-class="{ 'has-error' : applicantForm.language_id.$invalid && !applicantForm.language_id.$pristine }">
+            <label ng-hide="applicantForm.language_id.$invalid && !applicantForm.language_id.$pristine" for="language">Preferred Language: <i class="red">*</i></label>
+            <label ng-show="applicantForm.language_id.$invalid && !applicantForm.language_id.$pristine" class="red">Select a Language</label>
+            <select id="language_id" name="language_id" class="form-control" ng-model="applicant.language_id" convert-to-number ng-disabled="existing_employee" required >
+                <option value="">Please select ....</option>
+                <option ng-repeat="optionq in listOfLanguages" value={{optionq.id}}>{{optionq.name}}</option>
+            </select>
+        </div>
+        <div class="clearfix">
+            <div class="col-md-12">
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Qualification">
+                        <uib-tab-heading><i class="fa fa-graduation-cap"></i> Qualification </uib-tab-heading>
+
+                        <h4 class="m-top-30"><!-- Qualification --> </h4>
+                        <div class="form-group col-md-3 p-left-0">
+                            <label for="designation"> Degree</label>
+                        </div>
+                        <div class="form-group col-md-3 p-left-0">
+                            <label for="designation"> Institute </label>
+                        </div>
+                        <div class="form-group col-md-3 p-left-0">
+                            <label for="designation"> Majors </label>
+                        </div>
+                        <div class="form-group col-md-2 p-left-0">
+                            <label for="designation"> Year</label>
+                        </div>
+                        <div class="form-group col-md-1 p-left-0">
+                            <label for="action" class="d-block"><button class="btn btn-info btn-sm"  ng-click="addEducation()"><i class="fa fa-plus"></i> Qualification</button></label>
+                        </div>
+                        <span ng-repeat="(key, value) in applicant.applicant_educations">
+                            <div class="form-group col-md-3 p-left-0">
+                                <!-- <select class="form-control" ng-disabled="value.status" ng-model="value.education_id" convert-to-number>
+                                    <option value="">Please select ....</option>
+                                    <option ng-repeat="option in listOfEducations" value="{{option.id}}">{{option.name}}</option>
+                                </select> -->
+                                <ui-select ng-model="value.education_id" ng-disabled="value.status">
+                                    <ui-select-match>
+                                        <span ng-bind="$select.selected.name"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item.id as item in (listOfEducations | filter: $select.search) track by item.id">
+                                        <span ng-bind="item.name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-3 p-left-0">
+                                <!-- <select class="form-control"  ng-model="value.institute_id" convert-to-number>
+                                    <option value="">Please select ....</option>
+                                    <option ng-repeat="option in listOfInstitutes" value="{ {option.id} }">{ { option.name } }</option>
+                                </select> -->
+                                <!-- <p>Selected: {1{value.others}1}</p> -->
+                                <ui-select ng-model="value.others" ng-disabled="value.status"  on-select="onSelectCallback($item, $model)">
+                                    <ui-select-match>
+                                        <span>{{$select.selected.name || $select.search}}</span>
+                                        <!-- <span ng-bind="$select.selected.name"></span> -->
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in (listOfInstitutes | filter: $select.search) track by item.id" refresh="refreshResults($select)" refresh-delay="0">
+                                        <span ng-bind="item.name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <!-- <input type="text" class="form-control" ng-disabled="value.status" name="institute" placeholder="Institute"  ng-model="value.institute"> -->
+                            </div>
+                            <div class="form-group col-md-3 p-left-0">
+                                <ui-select ng-model="value.major_id" ng-disabled="value.status">
+                                    <ui-select-match>
+                                        <span ng-bind="$select.selected.name"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item.id as item in (listOfMajors | filter: $select.search) track by item.id">
+                                        <span ng-bind="item.name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-2 p-left-0">
+                                <select class="form-control" ng-model="value.year" ng-disabled="value.status" convert-to-number>
+                                     <option ng-repeat="option in years" value={{option.id}}>{{option.name}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-1 p-left-0">
+                               <!-- <button class="btn btn-danger btn-sm" ng-click="removeEducation(key)"><i class="fa fa-trash-o"></i></button><select name="year" class="form-control" id="year" ng-options="option.name for option in years track by option.id" ng-model="value.year"></select> -->
+                            </div>
+                        </span>
+                        <!-- <div class="form-group col-md-12 text-center">
+                                <button class="btn btn-info"><i class="fa fa-save"></i> Save</button>
+                            </div> -->
+                    </uib-tab>
+                    <uib-tab index="1" heading="Personal Experience">
+                        <uib-tab-heading><i class="fa fa-address-card-o"></i> Personal Experience </uib-tab-heading>
+
+                        <h4 class="m-top-30"><!-- Qualification --> </h4>
+
+                        <div class="form-group col-md-2 p-left-0">
+                            <label for="c-name">Company Name</label>
+                        </div>
+                        <div class="form-group col-md-2 p-left-0">
+                            <label for="designation">Designation</label>
+                        </div>
+                        <div class="form-group col-md-2 p-left-0">
+                            <label for="designation">From Date</label>
+                        </div>
+                        <div class="form-group col-md-2 p-left-0">
+                            <label for="designation">To Date</label>
+                        </div>
+                        <div class="form-group col-md-3 p-left-0">
+                            <label for="description">Job Description</label>
+                        </div>
+                        <div class="form-group col-md-1 p-left-0">
+                            <label for="action"><button class="btn btn-info btn-sm"  ng-click="addExperience()"><i class="fa fa-plus"></i> Experience</button></label>
+                        </div>
+                        <span ng-repeat="(key, value) in applicant.applicant_experiences">
+                            <div class="form-group col-md-2 p-left-0">
+                                <input type="text" class="form-control" name="company_name" placeholder="Company Name" ng-model="value.company_name">
+                            </div>
+                            <div class="form-group col-md-2 p-left-0">
+                                <input type="text" class="form-control" name="designation" placeholder="Designation" ng-model="value.designation">
+                            </div>
+                            <div class="form-group col-md-2 p-left-0">
+                                <div class="input-group" >
+                                    <input  name="start-time" type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="value.started" is-open="popup.openedStart[key].opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-inputmask="'mask':'9999-99-99'" required>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openStart(key)" ><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                                <!-- <input type="text" class="form-control" name="start-time" placeholder="From Date" ng-model="value.started"> -->
+                            </div>
+                            <div class="form-group col-md-2 p-left-0">
+                            <div class="input-group" >
+                                    <input  name="end-time" type="text" class="form-control" uib-datepicker-popup="yyyy-MM-dd" ng-model="value.ended" is-open="popup.openedEnd[key].opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" data-inputmask="'mask':'9999-99-99'" required>
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="openEnd(key)" ><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                                <!-- <input type="text" class="form-control" name="end-time" placeholder="To Date" ng-model="value.ended"> -->
+                            </div>
+                            <div class="form-group col-md-3 p-left-0">
+                                <input type="text" class="form-control" name="description" placeholder="Job Description" ng-model="value.job_description">
+                            </div>
+                            <div class="form-group col-md-1 p-left-0">
+                                <!-- <button class="btn btn-danger btn-sm" ng-click="removeExperience(key)"><i class="fa fa-trash-o"></i></button> -->
+                            </div>
+                        </span>
+                        <!-- <div class="form-group col-md-12 text-center">
+                            <button class="btn btn-info"><i class="fa fa-save"></i> Save</button>
+                        </div> -->
+                    </uib-tab>
+                     <uib-tab index="2" heading="Want to Refer...">
+                        <uib-tab-heading><i class="fa fa-star-o"></i> Want to Rrefer... </uib-tab-heading>
+                        <h4 class="m-top-30"><!-- Qualification --> </h4>
+
+                        <div class="form-group col-md-4 p-left-0">
+                            <label for="c-name">Name</label>
+                        </div>
+                        <div class="form-group col-md-4 p-left-0">
+                            <label for="designation">Phone</label>
+                        </div>
+                        <div class="form-group col-md-3 p-left-0">
+                            <label for="designation">Education Level</label>
+                        </div>
+                        <div class="form-group col-md-1 p-left-0">
+                            <label for="action"><button class="btn btn-info btn-sm"  ng-click="addRefrence()"><i class="fa fa-plus"></i> Refrence</button></label>
+                        </div>
+                        <span ng-repeat="(key, value) in applicant.applicant_refers">
+                            <div class="form-group col-md-4 p-left-0">
+                                <input type="text" class="form-control" name="refre_name" placeholder="Full Name" ng-model="value.name">
+                            </div>
+                            <div class="form-group col-md-4 p-left-0">
+                                <input type="text" class="form-control" name="refre_phone" placeholder="Phone Number" ng-model="value.phone">
+                            </div>
+                            <div class="form-group col-md-3 p-left-0">
+                                <ui-select ng-model="value.education_id">
+                                    <ui-select-match>
+                                        <span ng-bind="$select.selected.name"></span>
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item.id as item in (listOfEducations | filter: $select.search) track by item.id">
+                                        <span ng-bind="item.name"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div class="form-group col-md-1 p-left-0">
+                                <!-- <button class="btn btn-danger btn-sm" ng-click="removeExperience(key)"><i class="fa fa-trash-o"></i></button> -->
+                            </div>
+                        </span>
+                        <!-- <div class="form-group col-md-12 text-center">
+                            <button class="btn btn-info"><i class="fa fa-save"></i> Save</button>
+                        </div> -->
+                    </uib-tab>
+
+                    <!-- <uib-tab index="$index + 1" ng-repeat="tab in tabs" heading="{{tab.title}}" disable="tab.disabled">
+                        {{tab.content}}
+                    </uib-tab>
+                    <uib-tab index="3" select="alertMe()">
+                          <uib-tab-heading>
+                            <i class="glyphicon glyphicon-bell"></i> Alert!
+                          </uib-tab-heading>
+                          I've got an HTML heading, and a select callback. Pretty cool!
+                    </uib-tab>-->
+                </uib-tabset>
+            </div>
+        </div>
+        <div class="clearfix m-top-30">
+            <div class="form-group col-md-12" ng-hide="message">
+                <textarea ng-disabled="existing_employee" name="comments" ng-trim="true" placeholder="Career Objective..." class="form-control" rows="4" ng-model="applicant.comments"></textarea>
+            </div>
+            <div class="form-group col-md-6" ng-hide="message">
+                <input class="form-control" type="text" ng-model="applicant.state" ng-disabled="true" >
+            </div>
+            <div class="form-group col-md-6" ng-hide="message" ng-class="{ 'has-error' : applicantForm.source.$invalid && applicantForm.source.$touched }">
+                <select name="source" class="form-control" ng-model="applicant.source" ng-disabled="existing_employee"  required>
+                    <option value="">Please select a source... </option>
+                    <option ng-repeat="option in listOfSources" value={{option.name}}>{{option.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-12 ">
+                <div class="col-md-12 text-center">
+                     <button  class="btn btn-info" ng-disabled="applicantForm.$invalid" ng-click="saveEmployeeInformation('Forword')"><i class="fa fa-check" ></i> Submit </button>
+                     <button class="btn btn-danger" ng-click="setFormDefault()"><i class="fa fa-times"></i> Cancel </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+        <title>HRIS</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+        <meta name="description" content="Designed & Developed by Muhammad Rizwan Waheed">
+        <meta name="author" content="Muhammad Rizwan Waheed">
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+        <meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW, NOARCHIVE" />
+
+        <link href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Abel|Source+Sans+Pro:400,300,300italic,400italic,600,600italic,700,700italic,900,900italic,200italic,200' rel='stylesheet' type='text/css' />
+        <link href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'datatables/datatables.min.css' %}" rel="stylesheet">
+        <link href="{% static 'datatables/dataTables.bootstrap.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/jNotify.css' %}" rel="stylesheet">
+        <link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/select2-bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/ui-select/select.min.css' %}" rel="stylesheet">
+
+
+        <style>
+            /* .has-error .select2-selection {
+                border-color: rgb(185, 74, 72) !important;
+            } */
+        </style>
+        <script src="{% static 'js/jQuery_min.js' %}"></script>
+<!-- {#        <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>#} -->
+        <script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'js/jNotify.jquery.min.js' %}"></script>
+        <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
+        <script src="{% static 'js/core.js' %}"></script>
+{#        <script src="{% static 'js/inputmask/dist/jquery.inputmask.bundle.js' %}"></script>#}
+
+        <script src="{% static 'js/inputmask/dist/jquery.inputmask.bundle.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-sanitize.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-resource.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-route.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-animate.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-messages.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-cookies.min.js' %}"></script>
+
+        <script src="{% static 'js/angularjs/angular-datatables/angular-datatables.min.js' %}"></script>
+
+        <script src="{% static 'js/angularjs/angularUI/ui-bootstrap-custom-tpls-2.5.0.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/ui-select/dist/select.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angularFileUpload/dist/angular-file-upload-shim.js' %}"></script>
+        <script src="{% static 'js/angularjs/angularFileUpload/dist/angular-file-upload-all.js' %}"></script>
+        <script src="{% static 'js/angularjs/treeGrid/src/tree-grid-directive.js' %}"></script>
+        <script src="{% static 'js/angularjs/ui-mask/dist/mask.min.js' %}"></script>
+
+        {# <script src="{% static 'js/angularjs/ui-utils/modules/utils.js' %}"></script> #}
+        <link href="{% static 'js/angularjs/angular-datatables/plugins/bootstrap/datatables.bootstrap.min.css' %}" rel="stylesheet">
+
+        <script>
+            {#var basePath = '<?=BASE_PATH?>';#}
+            {##}
+            {# var designations = < ?php echo  json_encode($designations); ?>;#}
+            {# var departments = < ?php echo  json_encode($departments); ?>;#}
+
+            {# json.dumps(cities) #}
+
+            {#var token        = '28061981';#}
+			{#var currDate     = "<?=date('Y-m-d h:i:s')?>";#}
+			{#var templatePath = basePath+'/hr/tpl';#}
+			{#var servicesPath = basePath+'/hr/svc';#}
+			{#var userRoleID   = "<?=$user['roleID'] ?>";#}
+			{#var userCompanyID= '1';#}
+	        {#var userCompany  = 'Abacus ITS BPO';#}
+			{#var userRole     = "<?=$user['role'] ?>";#}
+
+
+
+        </script>
+        <style>
+			.alert.ng-hide-add,
+			.alert.ng-hide-remove {
+			    -moz-transition: 0.5s linear all;
+			    -o-transition: 0.5s linear all;
+			    -webkit-transition: 0.5s linear all;
+			    transition: 0.5s linear all;
+			    display: block !important;
+			    opacity: 1;
+			}
+			.alert.ng-hide {
+			    opacity: 0;
+			}
+		</style>
+    </head>
+    <body>                              <!-- header  -->
+        {% block content %}
+        {% endblock %}
+        <script src="{% static '/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static '/js/select2/select2.full.min.js' %}"></script>
+    </body>
+
+</html>

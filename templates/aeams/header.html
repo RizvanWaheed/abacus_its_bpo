@@ -1,0 +1,56 @@
+{% load static %}
+<nav class="navbar">
+    <div class="container-fluid nav-bs">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="javascript:;"><img src="{% static "images/logo.png" %}" alt="" /></a>
+            </div>
+             {% if request.user.is_authenticated %}
+                 <ul class="nav navbar-nav navbar-right">
+                    <li id="credintials">
+                        <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-user"></i> {{ request.user.get_name }} <i class="caret"></i></a>
+                        <ul class="dropdown-menu bootstrap-admin-theme-change-size"  role="menu">
+                            <!-- <li><a href="javascript:;" >Reset Password</a></li> -->
+{#                            <li role="presentation" class="divider"></li>#}
+                            <li><a href='javascript:window.location.href = "/aeams/logout"' > Logout</a></li>
+{#    						<li><a href="{% url django.contrib.auth.logout %}">Logout</a></li>#}
+                            <!-- <li><a class="size-changer small active">Small</a></li><li><a class="size-changer large ">Large</a></li> -->
+
+                        </ul>
+                    </li>
+                 </ul>
+                 <ul class="nav navbar-nav pull-right">
+                     {% for aces in access %}
+                        <li class="dropdown" id="{{aces.sub_setup__slug}}">
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+								{{ aces.sub_setup__name }} <i class="caret"></i>
+							</a>
+							<ul class="dropdown-menu nopadding" role="menu">
+								{% for chilc in aces.children %}
+									<li id="{{chilc.sub_setup__slug}}">
+										<a href="../{{aces.sub_setup__slug}}/{{chilc.sub_setup__slug}}">
+											{{chilc.sub_setup__name}}
+										</a>
+									</li>
+								{% endfor %}
+							</ul>
+						</li>
+                     {% endfor %}
+                 </ul>
+             {% else %}
+                <!--
+                    {#  <li id="credintials"><a href="{% url django.contrib.auth.login %}"> #}
+                    {#  Login</a> </li> #}
+                -->
+                 <ul class="nav navbar-nav pull-right">
+                     <li id="credintials">
+                         <a href="javascript:;" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="glyphicon glyphicon-user"></i> Applicant
+                         </a>
+                     </li>
+                 </ul>
+             {% endif %}
+
+        </div>
+    </div>
+</nav>

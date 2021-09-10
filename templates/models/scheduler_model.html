@@ -1,0 +1,50 @@
+<div class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 id="customerAddModalLabel" class="modal-title">{{modelName}}</h4>
+			</div>
+			<div class="modal-body">
+			   <form class="form-horizontal">
+			    <div class="form-group">
+					<label class="col-lg-2 control-label" for="focusedInput">Name</label>
+					<div class="col-lg-10">
+						<input class="form-control" ng-model="updateUsersVal.name" id="enterUserName" type="text" value="Enter User Name here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 control-label" for="focusedInput">Login name</label>
+					<div class="col-lg-10">
+						<input class="form-control" ng-model="updateUsersVal.username" id="enterUserName" type="text" value="Enter User Login Name here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 control-label" for="focusedInput">Password</label>
+					<div class="col-lg-10">
+						<input class="form-control" ng-model="updateUsersVal.password" id="enterUserPassword" type="text" value="Enter Password here...">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 control-label" for="focusedInput">Role</label>
+					<div class="col-lg-10">
+					    <select class="form-control" ng-model="selectedRole" id="selectedRole" ng-change="showReportingTo()" ng-options="rol.id as rol.name for rol in roles | orderBy:rol.name" ng-selected="selectedRole" ></select>
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-2 control-label" for="focusedInput">Reporting To</label>
+					<div class="col-lg-10">
+						<select class="form-control" ng-model="selectedReporting" id="selectedReporting" ng-options="rol.id as rol.username for rol in reporting | orderBy:rol.name" ng-selected="selectedReporting" ></select>
+					</div>
+
+				</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" ng-click="saveUserData()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div><!-- /.modal -->

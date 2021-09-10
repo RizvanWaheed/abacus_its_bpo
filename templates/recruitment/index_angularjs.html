@@ -1,0 +1,60 @@
+{% extends "aeams/layout.html" %}
+{% load static %}
+{% block content %}
+<base href="/recruitment/">
+<script>
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val()
+    var role = "{{ role }}";
+    var officers  = {{officers|safe}};
+    var allStates  = {{allStates|safe}};
+    var heads  = {{heads|safe}};
+    var states  = {{states|safe}};
+    var orientations  = {{orientations|safe}};
+    var departments  = {{departments|safe}};
+    var designations  = {{designations|safe}};
+    var projects  = {{projects|safe}};
+    var majors  = {{majors|safe}};
+    var institutes  = {{institutes|safe}};
+    var educations  = {{educations|safe}};
+    var cities  = {{cities|safe}};
+    var languages  = {{languages|safe}};
+    var religions  = {{religions|safe}};
+    var sects  = {{sects|safe}};
+
+    var token        = '28061981';
+    var currDate     = "{{ currDate }}";
+    var userRole     = 1;
+    var userRoleID   = 1;
+    var userCompanyID= 1;
+	var userCompany  = 'Abacus ITS BPO';
+
+    var recruitmentTemplatePath = '/static/recruitment/template/';
+    var recruitmentServicesPath = '/recruitment';
+
+</script>
+
+<script src="{% static 'recruitment/Filter.js' %}"></script>
+<script src="{% static 'recruitment/Directive.js' %}"></script>
+<script src="{% static 'recruitment/Module.js' %}"></script>
+<script src="{% static 'recruitment/Service.js' %}"></script>
+
+
+<script src="{% static 'recruitment/controller/RecruitmentController.js' %}"></script>
+<script src="{% static 'recruitment/controller/RecruitmentReportController.js' %}"></script>
+<script src="{% static 'recruitment/controller/InterviewCallController.js' %}"></script>
+<script src="{% static 'recruitment/controller/InterviewApprovalController.js' %}"></script>
+<script src="{% static 'recruitment/controller/ProfileRecruitmentController.js' %}"></script>
+
+<script src="{% static 'recruitment/Router.js' %}"></script>
+
+<div ng-app="Recruitment" ng-cloak >
+    {% include "aeams/header.html" %}
+    <div class="container m-bottom-30">
+        <div class="row">
+            <div class="col-sm-12 ">
+                <div ng-view class="view-animate"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

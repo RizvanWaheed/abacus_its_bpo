@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+        <title>HRIS</title>
+        <base href="/applicant">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+        <meta name="description" content="Designed & Developed by Muhammad Rizwan Waheed">
+        <meta name="author" content="Muhammad Rizwan Waheed">
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW" />
+        <meta name="GOOGLEBOT" content="NOINDEX, NOFOLLOW, NOARCHIVE" />
+
+        <link href="{% static 'css/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Abel|Source+Sans+Pro:400,300,300italic,400italic,600,600italic,700,700italic,900,900italic,200italic,200' rel='stylesheet' type='text/css' />
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/jNotify.css' %}" rel="stylesheet">
+        <link href="{% static 'css/select2.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/select2-bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/ui-select/select.min.css' %}" rel="stylesheet">
+
+        <style>
+            /* .has-error .select2-selection {
+                border-color: rgb(185, 74, 72) !important;
+            } */
+        </style>
+        <script src="{% static 'js/jQuery_min.js' %}"></script>
+        <script src="{% static 'js/jNotify.jquery.min.js' %}"></script>
+        <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
+        <script src="{% static 'js/core.js' %}"></script>
+{#        <script src="{% static 'js/inputmask/dist/jquery.inputmask.bundle.js' %}"></script>#}
+
+
+        <script src="{% static 'js/angularjs/angular.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-sanitize.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-resource.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-route.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-animate.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-messages.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angular-cookies.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angularUI/ui-bootstrap-custom-tpls-2.5.0.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/ui-select/dist/select.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/angularFileUpload/dist/angular-file-upload-shim.js' %}"></script>
+        <script src="{% static 'js/angularjs/angularFileUpload/dist/angular-file-upload-all.js' %}"></script>
+        <script src="{% static 'js/angularjs/ui-mask/dist/mask.min.js' %}"></script>
+        <script src="{% static 'js/angularjs/treeGrid/src/tree-grid-directive.js' %}"></script>
+        <script>
+                {#var basePath = '<?=BASE_PATH?>';#}
+                {##}
+                {#// var designations = < ?php echo  json_encode($designations); ?>;#}
+                {#// var departments = < ?php echo  json_encode($departments); ?>;#}
+                {#json.dumps(cities)#}
+
+                var csrftoken = $("[name=csrfmiddlewaretoken]").val()
+                var majors  = {{majors|safe}};
+                var institutes  = {{institutes|safe}};
+                var educations  = {{educations|safe}};
+                var cities  = {{cities|safe}};
+                var languages  = {{languages|safe}};
+            </script>
+
+
+                <style type="text/css">
+                    .switch {
+                  position: relative;
+                  display: inline-block;
+                  width: 45px;
+                  height: 19px;
+                }
+
+                .switch input {
+                  opacity: 0;
+                  width: 0;
+                  height: 0;
+                }
+
+                .slider {
+                  position: absolute;
+                  cursor: pointer;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background-color: #ccc;
+                  -webkit-transition: .4s;
+                  transition: .4s;
+                }
+
+                .slider:before {
+                  position: absolute;
+                  content: "";
+                  height: 11px;
+                  width: 11px;
+                  left: 4px;
+                  bottom: 4px;
+                  background-color: white;
+                  -webkit-transition: .4s;
+                  transition: .4s;
+                }
+
+                input:checked + .slider {
+                  background-color: #2196F3;
+                }
+
+                input:focus + .slider {
+                  box-shadow: 0 0 1px #2196F3;
+                }
+
+                input:checked + .slider:before {
+                  -webkit-transform: translateX(26px);
+                  -ms-transform: translateX(26px);
+                  transform: translateX(26px);
+                }
+
+                /* Rounded sliders */
+                .slider.round {
+                  border-radius: 34px;
+                }
+
+                .slider.round:before {
+                  border-radius: 50%;
+                }
+                  .btn-circle.btn-md {
+                            width: 50px;
+                            height: 50px;
+                            padding: 7px 10px;
+                            border-radius: 25px;
+                            font-size: 10px;
+                            text-align: center;
+                        }
+        </style>
+    </head>
+    <body>                              <!-- header  -->
+    {% include "aeams/header.html" %}
+    <div class="container m-bottom-30">
+        {% block content %}
+        {% endblock %}
+    </div>
+{#    {% include "models/scheduler_model.html" %}#}
+    <script src="{% static 'js/jQuery_bootstrap.js' %}"></script>
+    <script src="{% static '/js/select2/select2.full.min.js' %}"></script>
+
+
+</body>
+
+</html>
