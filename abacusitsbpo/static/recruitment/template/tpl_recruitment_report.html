@@ -1,0 +1,111 @@
+<div class="col-sm-12" ><!--  ng-controller="RecruitmentReportController" -->
+    <div class="clearfix">
+        <div class="col-md-12 p-left-0"><h3>Reports - <b>Recruitment</b></h3></div>
+    </div>
+    <div class="border-wrap clearfix">
+        <div class="col-md-12"><h4>Search Applicant</h4></div>
+        <form novalidate>
+            <input type="hidden" ng-model="applicantInformation.action" ng-value="getRecruitmentReport.json">
+            <div class="form-group col-md-3">
+                <select placeholder="HR Recruiter" class="form-control" ng-model="applicantInformation.officer" convert-to-number ng-disabled="existing_employee" >
+                    <option value="">HR Recruiter</option>
+                    <option ng-repeat="option in listOfOfficers" value={{option.id}}>{{option.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select class="form-control" ng-model="applicantInformation.sub_state_id" convert-to-number ng-disabled="existing_employee">
+                    <option value="">All Status</option>
+                    <option ng-repeat="option in listOfJobRecruitments" value={{option.id}}>{{option.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select class="form-control" ng-model="applicantInformation.project_id" convert-to-number ng-disabled="existing_employee">
+                    <option value="">Projects</option>
+                    <option ng-repeat="option in listOfProjects" value={{option.id}}>{{option.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <select class="form-control" ng-model="applicantInformation.approved_by" convert-to-number ng-disabled="existing_employee">
+                    <option value="">Approved by any</option>
+                    <option ng-repeat="option in listOfManagements" value={{option.id}}>{{option.name}}</option>
+                </select>
+            </div>
+            <!-- <div class="form-group col-md-3">
+                <select class="form-control">
+                    <option value="not_called">Not Called</option>
+                    <option value="called">Called</option>
+                </select>
+            </div> -->
+            <div class="form-group col-md-3">
+                <div class="input-group" >
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="applicantInformation.from" is-open="popup.from" datepicker-options="dateOptions" close-text="Close" ng-disabled="existing_employee" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="from()" ng-disabled="existing_employee">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="input-group" >
+                    <input type="text" class="form-control" uib-datepicker-popup ng-model="applicantInformation.to" is-open="popup.to" datepicker-options="dateOptions" close-text="Close" ng-disabled="existing_employee" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="to()" ng-disabled="existing_employee">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group col-md-3 text-center">
+                <button class="btn btn-info" ng-click="searchApplicant()">Search <i class="fa fa-search"></i></button>
+                <button class="btn btn-info" ng-click="downloadApplicant()">Download <i class="fa fa-download"></i></button>
+            </div>
+        </form>
+    </div>
+                    <div class="clearfix">
+                        <div class="col-md-12 p-left-0"><h3>Result</h3></div>
+                    </div>
+                    <div class="border-wrap">
+                        <div class="table-responsive text-center">
+                            <table class="table table-striped nomargin">
+                                <thead>
+                                    <tr>
+                                        <!--   <td>#</td> -->
+                                        <td>NAME</td>
+                                        <!--  <td>Gender</td> -->
+                                        <td>CONTACT</td>
+                                        <!-- <td>STATUS</td> -->
+                                        <td>PROJECT</td>
+                                        <td>INTERVIEWED OFFICER</td>
+                                        <td>INTERVIEWED STATUS</td>
+                                        <td>INTERVIEWED DATE</td>
+                                       <!-- <td>APP/REJ-BY</td> -->
+                                       <!--  <td>CALL</td>
+                                        <td>PROFILE</td> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, dta) in showTableData">
+                                       <!--  <td>{{key}}</td> -->
+                                        <td>{{dta.first_name}} {{ dta.last_name }}</td>
+                                      <!--   <td>{{dta.gender}}</td> -->
+                                        <td>{{dta.contact}}</td>
+                                        <!-- <td>{{dta.state}}</td> -->
+                                        <td>{{dta.project__name}}</td>
+                                        <td>{{dta.selected_by__name}}</td>
+                                        <td>{{dta.state_name}}</td>
+                                        <td>{{dta.selected}}</td>
+                                       <!--
+                                        <td>{-{ data }-}</td>
+                                        <td>{-{ data }-}</td>
+                                        -->
+                                       <!--  <td>CALL</td>
+                                        <td>PROFILE</td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+</div>

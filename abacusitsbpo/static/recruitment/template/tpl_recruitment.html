@@ -1,0 +1,30 @@
+<div class="container m-top-30 m-bottom-30">
+    <uib-tabset active="activeTabIndex" justified="true">
+        <uib-tab index="0.0" heading="Recruitment" active="applicantSelectedTab == 0">
+            <uib-tab-heading><i class="glyphicon glyphicon-user"></i> Recruitment</uib-tab-heading>
+            <div ng-include src="template.recruitment_form" class="view-animate"></div>
+        </uib-tab>
+        <!-- <ng-include src="template.recruitment_form"></ng-include> -->
+        <uib-tab index="0.1" heading="Applicant" select="loadTodayApplicantList('applicant')" active="applicantSelectedTab == 1">
+            <uib-tab-heading><i class="glyphicon glyphicon-user"></i> Queue</a> </uib-tab-heading>
+            <div class="clearfix">
+                <div class="col-md-12 p-left-0"><h3> Today - <b>Applicant Queue </b></h3></div>
+            </div>
+            <div ng-include src="template.recruitment_queue" class="view-animate"></div>
+        </uib-tab>
+        <uib-tab index="0.2" heading="Selected" select="loadTodayApplicantList('selected')" active="applicantSelectedTab == 2">
+            <uib-tab-heading><i class="glyphicon glyphicon-user"></i> Selected </a> </uib-tab-heading>
+                <div class="clearfix">
+                    <div class="col-md-12 p-left-0"><h3> Today - <b> Selected List </b></h3></div>
+                </div>
+                <div ng-include src="template.recruitment_queue" class="view-animate"></div>
+        </uib-tab>
+        <uib-tab index="0.3" heading="Rejected" select="loadTodayApplicantList('rejected')" active="applicantSelectedTab == 3">
+            <uib-tab-heading><i class="glyphicon glyphicon-user"></i> Rejected </a> </uib-tab-heading>
+                <div class="clearfix">
+                    <div class="col-md-12 p-left-0"><h3> Today - <b> Rejected List </b></h3></div>
+                </div>
+                <div ng-include src="template.recruitment_queue" class="view-animate"></div>
+        </uib-tab>
+    </uib-tabset>
+</div>

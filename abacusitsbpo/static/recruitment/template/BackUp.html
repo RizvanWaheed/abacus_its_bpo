@@ -1,0 +1,14 @@
+ <div class="form-group col-md-3" ng-class="{ 'has-error' : recruitmentForm.language_id.$invalid && !recruitmentForm.language_id.$pristine }">
+        <label ng-hide="recruitmentForm.language_id.$invalid && !recruitmentForm.language_id.$pristine" for="language">Preferred Language: <i class="red">*</i></label>
+        <label ng-show="recruitmentForm.language_id.$invalid && !recruitmentForm.language_id.$pristine" class="red">Select a Language</label>
+        <select id="language_id" name="language_id" class="form-control" ng-model="applicant.language_id" convert-to-number ng-disabled="existing_employee" required >
+            <option value="">Please select ....</option>
+            <option ng-repeat="optionq in listOfLangauges" value={{optionq.id}}>{{optionq.name}}</option>
+        </select>
+    </div>
+  <div class="form-group col-md-3" ng-class="{ 'has-error' : recruitmentForm.last_name.$invalid && !recruitmentForm.last_name.$pristine }">
+        <label ng-hide="recruitmentForm.last_name.$invalid && recruitmentForm.last_name.$error.minlength" for="name">Last Name: <i class="red">*</i></label>
+        <label ng-show="recruitmentForm.last_name.$invalid && !recruitmentForm.last_name.$pristine && recruitmentForm.last_name.$error.minlength" class="red">Last Name is required.</label>
+        <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Enter Last name" ng-minlength="3" ng-model="applicant.last_name" ng-disabled="existing_employee" required>
+       <!--  <p ng-show="recruitmentForm.last_name.$invalid && !recruitmentForm.last_name.$pristine && recruitmentForm.last_name.$error.minlength" class="help-block">You name is required.</p>  -->
+    </div>
